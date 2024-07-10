@@ -8,6 +8,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <exec.mainClass>com.budget.Main</exec.mainClass>
     </properties>
     <dependencies>
         <!-- Add any dependencies here if needed -->
