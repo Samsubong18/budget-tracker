@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Budget implements Serializable {
-    private static final long serialVersionUID = 1L;
     private String name;
     private double income;
     private String startDate;
@@ -53,17 +52,20 @@ public class Budget implements Serializable {
     }
 
     public void addExpense(Expense expense) {
-        this.expenses.add(expense);
+        expenses.add(expense);
+    }
+
+    public double getTotalExpenses() {
+        return expenses.stream().mapToDouble(Expense::getAmount).sum();
+    }
+
+    public double getAvailableBalance() {
+        return income - getTotalExpenses();
     }
 
     @Override
     public String toString() {
-        return "Budget{" +
-                "name='" + name + '\'' +
-                ", income=" + income +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", expenses=" + expenses +
-                '}';
+        return String.format("Budget: %s\nIncome: %.2f\nStart Date: %s\nEnd Date: %s\nTotal Expenses: %.2f\nAvailable Balance: %.2f\n",
+                name, income, startDate, endDate, getTotalExpenses(), getAvailableBalance());
     }
 }
